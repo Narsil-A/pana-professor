@@ -1,0 +1,22 @@
+# Node.js
+node_modules
+npm-debug.log
+yarn-error.log
+
+
+# Environment files in django_backend
+backend/django_backend/.env
+backend/.env.dev
+
+
+# Next.js
+.next
+out
+
+# Logs
+logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db

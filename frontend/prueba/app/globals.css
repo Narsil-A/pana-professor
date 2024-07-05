@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.video-player-container {
+    width: 100%;
+    max-width: 800px; /* Adjust max width as needed */
+    margin: 0 auto;
+    background-color: #333; /* Custom background color */
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.react-player {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: #444; /* Custom control background color */
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.control-button {
+    color: #fff;
+    background-color: #ff5722; /* Custom button color */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.control-button:hover {
+    background-color: #e64a19; /* Hover color */
+}
+
+.seek-slider, .volume-slider {
+    width: 30%;
+    background-color: #777; /* Custom slider background */
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.quality-select {
+    color: #fff;
+    background-color: #555; /* Custom select background color */
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
