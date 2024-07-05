@@ -14,8 +14,6 @@ class ClassListSerializer(serializers.ModelSerializer):
             'price_per_session',
             'image_url',
         )
-
-
 class ClassDetailSerializer(serializers.ModelSerializer):
     professor = UserDetailSerializer(read_only=True)
     video_url = serializers.SerializerMethodField()
@@ -45,7 +43,6 @@ class ClassDetailSerializer(serializers.ModelSerializer):
     
     def get_subtitles(self, obj):
         return obj.subtitles if obj.subtitles else []
-
 
 
 class ClassSerializer(serializers.ModelSerializer):

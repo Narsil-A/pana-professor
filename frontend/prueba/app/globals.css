@@ -2,11 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+
 .video-player-container {
     width: 100%;
-    max-width: 800px; /* Adjust max width as needed */
+    max-width: 800px;
     margin: 0 auto;
-    background-color: #333; /* Custom background color */
+    background-color: #333;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -22,14 +23,14 @@
     justify-content: space-around;
     align-items: center;
     padding: 10px;
-    background-color: #444; /* Custom control background color */
+    background-color: #444;
     border-radius: 10px;
     margin-top: 10px;
 }
 
 .control-button {
     color: #fff;
-    background-color: #ff5722; /* Custom button color */
+    background-color: #ff5722;
     border: none;
     padding: 8px 12px;
     border-radius: 5px;
@@ -37,19 +38,19 @@
 }
 
 .control-button:hover {
-    background-color: #e64a19; /* Hover color */
+    background-color: #e64a19;
 }
 
 .seek-slider, .volume-slider {
     width: 30%;
-    background-color: #777; /* Custom slider background */
+    background-color: #777;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.quality-select {
+.quality-select, .subtitle-select {
     color: #fff;
-    background-color: #555; /* Custom select background color */
+    background-color: #555;
     border: none;
     padding: 5px;
     border-radius: 5px;

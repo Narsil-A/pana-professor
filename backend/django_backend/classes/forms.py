@@ -1,7 +1,11 @@
 from django import forms
 from .models import Class
 
+
+
 class ClassForm(forms.ModelForm):
+    subtitles = forms.FileField(widget=forms.ClearableFileInput(), required=False)
+
     class Meta:
         model = Class
         fields = [
@@ -17,6 +21,5 @@ class ClassForm(forms.ModelForm):
             'video_480p',
             'video_720p', 
             'video_1080p', 
-            'external_video_url',
-            'subtitles',
+            'external_video_url', 
         ]

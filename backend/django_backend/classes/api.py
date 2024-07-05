@@ -1,23 +1,16 @@
+import os 
+import uuid
 from django.http import JsonResponse
-
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
-from rest_framework_simplejwt.tokens import AccessToken
-from rest_framework.response import Response
-
-from .serializers import ClassListSerializer, ClassDetailSerializer
-
-from .forms import ClassForm
-
 from .models import Class
-from useraccount.models import User
+from .forms import ClassForm
+from .serializers import ClassDetailSerializer, ClassListSerializer 
+from django.conf import settings
 
-import logging
 
 
-
-logger = logging.getLogger(__name__)
 
 @api_view(['GET'])
 @authentication_classes([])
@@ -91,9 +84,30 @@ def create_class(request):
         class_instance.professor = request.user
         class_instance.save()
 
-        return JsonResponse({'success': True, 'data': ClassDetailSerializer(class_instance).data})
+        # Handle subtitle files
+        subtitle_files = request.FILES.getlist('subtitles')
+        subtitles = []
+        for index, subtitle_file in enumerate(subtitle_files):
+            subtitle_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', 'classes', 'subtitles')
+            if not os.path.exists(subtitle_dir):
+                os.makedirs(subtitle_dir, exist_ok=True)  # Ensure the directory exists
+            subtitle_path = os.path.join(subtitle_dir, f'{uuid.uuid4()}_{subtitle_file.name}')
+            with open(subtitle_path, 'wb+') as destination:
+                for chunk in subtitle_file.chunks():
+                    destination.write(chunk)
+            subtitles.append({
+                'src': f'{settings.WEBSITE_URL}/media/uploads/classes/subtitles/{os.path.basename(subtitle_path)}',
+                'lang': subtitle_file.name.split('.')[0],
+                'label': subtitle_file.name.split('.')[0],
+                'default': index == 0  # Set the first subtitle as default
+            })
+        class_instance.subtitles = subtitles
+        class_instance.save()
+
+        return JsonResponse({'success': True, 'data': ClassDetailSerializer(class_instance, context={'request': request}).data})
     else:
-        print('Form Errors:', form.errors) 
+        print('Form Errors:', form.errors)
+        return JsonResponse({'success': False, 'errors': form.errors})
 
 
 
@@ -113,16 +127,22 @@ def class_video(request, pk):
         {"label": "1080p", "src": class_instance.get_video_url('1080p')}
     ]
     
-    subtitles = class_instance.get_subtitles()
+    subtitles = [{
+        "kind": "subtitles",
+        "src": subtitle["src"],
+        "srcLang": subtitle["lang"],
+        "label": subtitle["label"].split('-')[1].strip()  # Extracts "English" or "Spanish" from the filename
+    } for subtitle in (class_instance.subtitles if class_instance.subtitles else [])]
     
     data = {
         'id': class_instance.id,
         'title': class_instance.title,
-        'video_url': class_instance.get_video_url(),
+        'video_url': class_instance.get_video_url('360p'),
         'video_qualities': video_qualities,
         'subtitles': subtitles,
     }
     return JsonResponse(data)
+
 
 
 @api_view(['POST'])

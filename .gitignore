@@ -3,11 +3,12 @@ node_modules
 npm-debug.log
 yarn-error.log
 
-
 # Environment files in django_backend
-backend/django_backend/.env
-backend/.env.dev
+django_backend/.env
+django_backend/.env.dev
 
+# Python virtual environment
+django_backend/env/
 
 # Next.js
 .next
@@ -20,3 +21,5 @@ logs
 # OS generated files
 .DS_Store
 Thumbs.db
+
+.env*.local

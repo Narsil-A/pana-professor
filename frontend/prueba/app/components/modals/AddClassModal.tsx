@@ -32,10 +32,7 @@ const AddClassModal: FC = () => {
     const [video720p, setVideo720p] = useState<File | null>(null);
     const [video1080p, setVideo1080p] = useState<File | null>(null);
     const [externalVideoUrl, setExternalVideoUrl] = useState<string>('');
-    const [subtitles, setSubtitles] = useState<{ lang: string, file: File | null }[]>([
-        { lang: 'English', file: null },
-        { lang: 'Japanese', file: null },
-    ]);
+    const [subtitles, setSubtitles] = useState<File[]>([]);
 
     const addClassModal = useAddClassModal();
     const router = useRouter();
@@ -47,39 +44,16 @@ const AddClassModal: FC = () => {
         }
     }
 
-    const setVideo360pHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const setVideoHandler = (setter: React.Dispatch<React.SetStateAction<File | null>>) => (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             const tmpVideo = event.target.files[0];
-            setVideo360p(tmpVideo);
-        }
-    }
-    const setVideo480pHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const tmpVideo = event.target.files[0];
-            setVideo480p(tmpVideo);
+            setter(tmpVideo);
         }
     }
 
-
-    const setVideo720pHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const tmpVideo = event.target.files[0];
-            setVideo720p(tmpVideo);
-        }
-    }
-
-    const setVideo1080pHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const tmpVideo = event.target.files[0];
-            setVideo1080p(tmpVideo);
-        }
-    }
-    const setSubtitleHandler = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
-        if (event.target.files && event.target.files.length > 0) {
-            const tmpFile = event.target.files[0];
-            const newSubtitles = [...subtitles];
-            newSubtitles[index] = { ...newSubtitles[index], file: tmpFile };
-            setSubtitles(newSubtitles);
+    const setSubtitlesHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files) {
+            setSubtitles(Array.from(event.target.files));
         }
     }
 
@@ -104,29 +78,13 @@ const AddClassModal: FC = () => {
             formData.append('subject', dataSubject);
             formData.append('image', dataImage);
 
-            if (video360p) {
-                formData.append('video_360p', video360p);
-            }
-            if (video480p) {
-                formData.append('video_480p', video480p);
-            }
-
-            if (video720p) {
-                formData.append('video_720p', video720p);
-            }
-
-            if (video1080p) {
-                formData.append('video_1080p', video1080p);
-            }
-
-            if (externalVideoUrl) {
-                formData.append('external_video_url', externalVideoUrl);
-            }
-            subtitles.forEach((subtitle, index) => {
-                if (subtitle.file) {
-                    formData.append(`subtitles[${index}][file]`, subtitle.file);
-                    formData.append(`subtitles[${index}][lang]`, subtitle.lang);
-                }
+            if (video360p) formData.append('video_360p', video360p);
+            if (video480p) formData.append('video_480p', video480p);
+            if (video720p) formData.append('video_720p', video720p);
+            if (video1080p) formData.append('video_1080p', video1080p);
+            if (externalVideoUrl) formData.append('external_video_url', externalVideoUrl);
+            subtitles.forEach((subtitle) => {
+                formData.append('subtitles', subtitle);
             });
 
             try {
@@ -151,7 +109,6 @@ const AddClassModal: FC = () => {
             setErrors(['All fields are required']);
         }
     }
-
     const content = (
         <>
             {currentStep === 1 ? (
@@ -242,9 +199,9 @@ const AddClassModal: FC = () => {
                 </>
             ) : (
                 <>
-                    <h2 className='mb-2 text-2xl'>Media</h2>
-                    <div className='pt-3 pb-3 space-y-2'>
-                        <div className='py-2 px-3 bg-gray-600 text-white rounded-xl'>
+                    <h2 className='mb-4 text-2xl'>Media</h2>
+                    <div className='media-section max-h-96 overflow-y-auto pt-3 pb-6 space-y-4'>
+                        <div className='py-4 px-6 bg-gray-600 text-white rounded-xl'>
                             <label htmlFor="imageUpload">Upload Image</label>
                             <input id="imageUpload" type="file" accept='image/*' onChange={setImage} />
                         </div>
@@ -261,19 +218,19 @@ const AddClassModal: FC = () => {
                         )}
                         <div className='py-2 px-6 bg-gray-600 text-white rounded-xl'>
                             <label htmlFor="video360pUpload">Upload Video 360p</label>
-                            <input id="video360pUpload" type="file" accept='video/*' onChange={setVideo360pHandler} />
+                            <input id="video360pUpload" type="file" accept='video/*' onChange={setVideoHandler(setVideo360p)} />
                         </div>
                         <div className='py-2 px-6 bg-gray-600 text-white rounded-xl'>
                             <label htmlFor="video480pUpload">Upload Video 480p</label>
-                            <input id="video480pUpload" type="file" accept='video/*' onChange={setVideo480pHandler} />
+                            <input id="video480pUpload" type="file" accept='video/*' onChange={setVideoHandler(setVideo480p)} />
                         </div>
                         <div className='py-2 px-6 bg-gray-600 text-white rounded-xl'>
                             <label htmlFor="video720pUpload">Upload Video 720p</label>
-                            <input id="video720pUpload" type="file" accept='video/*' onChange={setVideo720pHandler} />
+                            <input id="video720pUpload" type="file" accept='video/*' onChange={setVideoHandler(setVideo720p)} />
                         </div>
                         <div className='py-2 px-6 bg-gray-600 text-white rounded-xl'>
                             <label htmlFor="video1080pUpload">Upload Video 1080p</label>
-                            <input id="video1080pUpload" type="file" accept='video/*' onChange={setVideo1080pHandler} />
+                            <input id="video1080pUpload" type="file" accept='video/*' onChange={setVideoHandler(setVideo1080p)} />
                         </div>
                         <div className='flex flex-col space-y-2'>
                             <label>External Video URL</label>
@@ -286,12 +243,7 @@ const AddClassModal: FC = () => {
                         </div>
                         <div className='py-2 px-6 bg-gray-600 text-white rounded-xl'>
                             <label>Upload Subtitles</label>
-                            {subtitles.map((subtitle, index) => (
-                                <div key={index} className='my-2'>
-                                    <label htmlFor={`subtitleUpload${index}`}>{subtitle.lang}</label>
-                                    <input id={`subtitleUpload${index}`} type="file" accept='.vtt' onChange={setSubtitleHandler(index)} />
-                                </div>
-                            ))}
+                            <input type="file" accept='.vtt' multiple onChange={setSubtitlesHandler} />
                         </div>
                     </div>
                     {errors.length > 0 && (
