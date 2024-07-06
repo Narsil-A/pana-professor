@@ -4,8 +4,8 @@ npm-debug.log
 yarn-error.log
 
 # Environment files in django_backend
-django_backend/.env
-django_backend/.env.dev
+backend/django_backend/env
+backend/django_backend/.env.dev
 
 # Python virtual environment
 django_backend/env/
@@ -23,3 +23,5 @@ logs
 Thumbs.db
 
 .env*.local
+
+backend/django_backend/media

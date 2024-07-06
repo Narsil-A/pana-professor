@@ -42,20 +42,20 @@ const AddClassModal: FC = () => {
             const tmpImage = event.target.files[0];
             setDataImage(tmpImage);
         }
-    }
+    };
 
     const setVideoHandler = (setter: React.Dispatch<React.SetStateAction<File | null>>) => (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             const tmpVideo = event.target.files[0];
             setter(tmpVideo);
         }
-    }
+    };
 
     const setSubtitlesHandler = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             setSubtitles(Array.from(event.target.files));
         }
-    }
+    };
 
     const submitForm = async () => {
         if (
@@ -108,7 +108,8 @@ const AddClassModal: FC = () => {
         } else {
             setErrors(['All fields are required']);
         }
-    }
+    };
+
     const content = (
         <>
             {currentStep === 1 ? (

@@ -1,11 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import apiService from "@/app/services/apiService";
-import { getUserId } from "@/app/lib/actions";
+
 
 const ClassDetailPage = async ({ params }: { params: { id: string } }) => {
     const classItem = await apiService.get(`/api/classes/${params.id}`);
-    const userId = await getUserId();
 
     return (
         <main className="max-w-[1500px] mx-auto px-6 pb-6">
