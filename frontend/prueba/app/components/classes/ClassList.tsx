@@ -7,12 +7,18 @@ import ClassListItem from "./ClassListItem";
 import apiService from '@/app/services/apiService';
 import useSearchModal from '@/app/hooks/useSearchModal';
 
-export type ClassType = {
+export interface ClassType {
     id: string;
     title: string;
-    image_url: string;
+    description: string;
     price_per_session: number;
+    duration_in_minutes: number;
+    max_students: number;
+    subject: string;
+    category: string;
+    image_url: string;
     is_favorite: boolean;
+    professor: string;
 }
 
 interface ClassListProps {

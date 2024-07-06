@@ -13,6 +13,9 @@ class ClassListSerializer(serializers.ModelSerializer):
             'category',
             'price_per_session',
             'image_url',
+            'description',
+            'professor',
+            'duration_in_minutes',
         )
 class ClassDetailSerializer(serializers.ModelSerializer):
     professor = UserDetailSerializer(read_only=True)

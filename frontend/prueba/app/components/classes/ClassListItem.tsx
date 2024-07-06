@@ -15,7 +15,7 @@ const ClassListItem: React.FC<ClassProps> = ({
     const router = useRouter();
 
     return (
-        <div 
+        <div
             className="cursor-pointer"
             onClick={() => router.push(`/classes/${classItem.id}`)}
         >
@@ -42,6 +42,10 @@ const ClassListItem: React.FC<ClassProps> = ({
             </div>
 
             <div className="mt-2">
+                <p className="text-sm text-gray-500">Description <strong>{classItem.description}</strong></p>
+
+                <p className="text-sm text-gray-500">Duration <strong>{classItem.duration_in_minutes} minutes</strong></p>
+
                 <p className="text-sm text-gray-500"><strong>${classItem.price_per_session}</strong> per session</p>
             </div>
         </div>
