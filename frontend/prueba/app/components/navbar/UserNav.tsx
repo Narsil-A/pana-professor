@@ -23,7 +23,7 @@ const UserNav: React.FC<UserNavProps> = ({
 
     return (
         <div className="p-2 relative inline-block border rounded-full">
-            <button 
+            <button
                 onClick={() => setIsOpen(!isOpen)}
                 className="flex items-center"
             >
@@ -47,7 +47,13 @@ const UserNav: React.FC<UserNavProps> = ({
                                     router.push('/inbox');
                                 }}
                             />
-
+                            <MenuLink
+                                label='Score'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/scores');
+                                }}
+                            />
                             <MenuLink
                                 label='My classes'
                                 onClick={() => {
@@ -76,7 +82,7 @@ const UserNav: React.FC<UserNavProps> = ({
                         </>
                     ) : (
                         <>
-                            <MenuLink 
+                            <MenuLink
                                 label='Log in'
                                 onClick={() => {
                                     setIsOpen(false);
@@ -84,7 +90,7 @@ const UserNav: React.FC<UserNavProps> = ({
                                 }}
                             />
 
-                            <MenuLink 
+                            <MenuLink
                                 label='Sign up'
                                 onClick={() => {
                                     setIsOpen(false);
