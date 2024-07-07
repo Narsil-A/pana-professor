@@ -30,20 +30,124 @@
     @apply flex items-center;
 }
 
-
-
-
-  .circular-progress {
+.circular-progress {
     display: block;
     margin: auto;
-  }
+}
   
-  .circular-progress-trail {
+.circular-progress-trail {
     stroke: #d6d6d6;
-  }
+}
   
-  .circular-progress-path {
+.circular-progress-path {
     transition: stroke-dashoffset 0.35s;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
-  }
+}
+
+.quiz-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.quiz-title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.quiz-container {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+    height: 10px;
+    margin-bottom: 20px;
+    transition: width 0.3s ease-in-out;
+    max-width: 100%;
+}
+
+.question-container {
+    margin-bottom: 20px;
+}
+
+.question {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.options {
+    margin-bottom: 20px;
+}
+
+.option-bar {
+    display: block;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.option-bar.hovering {
+    background: #e0e0e0;
+}
+
+.option-bar.correct {
+    background: #4caf50;
+    color: white;
+}
+
+.option-bar.incorrect {
+    background: #f44336;
+    color: white;
+}
+
+.next-button {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.next-button:disabled {
+    background: #ccc;
+}
+
+.feedback {
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.correct {
+    color: green;
+}
+
+.incorrect {
+    color: red;
+}
+
+.score-container {
+    text-align: center;
+}
+
+.finish-button {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}

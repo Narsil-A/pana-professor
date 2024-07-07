@@ -16,3 +16,12 @@ export interface ClassItem {
     };
   }
   
+
+
+  export interface QuizQuestion {
+    id: number;
+    type: 'multiple-choice' | 'true-false';
+    question: string;
+    options?: string[]; // Only for multiple-choice questions
+    answer: string | boolean; // The correct answer
+  }

@@ -62,10 +62,10 @@ const UserNav: React.FC<UserNavProps> = ({
                                 }}
                             />
                             <MenuLink
-                                label='My classes'
+                                label='Quiz'
                                 onClick={() => {
                                     setIsOpen(false);
-                                    router.push('/myclasses');
+                                    router.push('/quiz');
                                 }}
                             />
 

@@ -5,11 +5,11 @@ import React from 'react';
 interface CircularProgressProps {
   percentage: number;
   text?: string;
-  size?: number; // Optional size property in pixels
-  strokeWidth?: number; // Optional stroke width property
-  color?: string; // Optional color property
-  trailColor?: string; // Optional trail color property
-  gradient?: [string, string]; // Optional gradient colors
+  size?: number;
+  strokeWidth?: number;
+  color?: string;
+  trailColor?: string;
+  gradient?: [string, string];
 }
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
@@ -94,6 +94,3 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 };
 
 export default CircularProgress;
-
-
-
