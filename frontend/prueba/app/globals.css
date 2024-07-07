@@ -31,3 +31,19 @@
 }
 
 
+
+
+  .circular-progress {
+    display: block;
+    margin: auto;
+  }
+  
+  .circular-progress-trail {
+    stroke: #d6d6d6;
+  }
+  
+  .circular-progress-path {
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }

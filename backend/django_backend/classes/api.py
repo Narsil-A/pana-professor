@@ -87,26 +87,77 @@ def create_class(request):
         # Handle subtitle files
         subtitle_files = request.FILES.getlist('subtitles')
         subtitles = []
+
         for index, subtitle_file in enumerate(subtitle_files):
             subtitle_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', 'classes', 'subtitles')
+
             if not os.path.exists(subtitle_dir):
-                os.makedirs(subtitle_dir, exist_ok=True)  # Ensure the directory exists
+                os.makedirs(subtitle_dir, exist_ok=True)  
             subtitle_path = os.path.join(subtitle_dir, f'{uuid.uuid4()}_{subtitle_file.name}')
+
             with open(subtitle_path, 'wb+') as destination:
                 for chunk in subtitle_file.chunks():
                     destination.write(chunk)
+
             subtitles.append({
                 'src': f'{settings.WEBSITE_URL}/media/uploads/classes/subtitles/{os.path.basename(subtitle_path)}',
                 'lang': subtitle_file.name.split('.')[0],
                 'label': subtitle_file.name.split('.')[0],
-                'default': index == 0  # Set the first subtitle as default
+                'default': index == 0  
             })
+
         class_instance.subtitles = subtitles
         class_instance.save()
 
         return JsonResponse({'success': True, 'data': ClassDetailSerializer(class_instance, context={'request': request}).data})
     else:
         print('Form Errors:', form.errors)
+        return JsonResponse({'success': False, 'errors': form.errors})
+
+
+
+@api_view(['POST'])
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+def update_class(request, pk):
+    try:
+        class_instance = Class.objects.get(pk=pk, professor=request.user)
+    except Class.DoesNotExist:
+        return Response({'success': False, 'error': 'Class not found or you do not have permission to edit this class'}, status=404)
+    
+    form = ClassForm(request.POST, request.FILES, instance=class_instance)
+
+    if form.is_valid():
+        class_instance = form.save(commit=False)
+        class_instance.professor = request.user
+        class_instance.save()
+
+        # Handle subtitle files
+        subtitle_files = request.FILES.getlist('subtitles')
+        subtitles = []
+        for index, subtitle_file in enumerate(subtitle_files):
+            subtitle_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', 'classes', 'subtitles')
+
+            if not os.path.exists(subtitle_dir):
+                os.makedirs(subtitle_dir, exist_ok=True) 
+            subtitle_path = os.path.join(subtitle_dir, f'{uuid.uuid4()}_{subtitle_file.name}')
+            
+            with open(subtitle_path, 'wb+') as destination:
+                for chunk in subtitle_file.chunks():
+                    destination.write(chunk)
+
+            subtitles.append({
+                'src': f'{settings.WEBSITE_URL}/media/uploads/classes/subtitles/{os.path.basename(subtitle_path)}',
+                'lang': subtitle_file.name.split('.')[0],
+                'label': subtitle_file.name.split('.')[0],
+                'default': index == 0 
+            })
+
+        class_instance.subtitles = subtitles
+        class_instance.save()
+
+        return JsonResponse({'success': True, 'data': ClassDetailSerializer(class_instance, context={'request': request}).data})
+    else:
         return JsonResponse({'success': False, 'errors': form.errors})
 
 

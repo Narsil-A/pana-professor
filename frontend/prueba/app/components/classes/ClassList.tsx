@@ -1,6 +1,5 @@
 'use client';
 
-import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ClassListItem from "./ClassListItem";

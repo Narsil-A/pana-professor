@@ -48,10 +48,17 @@ const UserNav: React.FC<UserNavProps> = ({
                                 }}
                             />
                             <MenuLink
-                                label='Score'
+                                label='Scores'
                                 onClick={() => {
                                     setIsOpen(false);
                                     router.push('/scores');
+                                }}
+                            />
+                            <MenuLink
+                                label='Data progress'
+                                onClick={() => {
+                                    setIsOpen(false);
+                                    router.push('/classes');
                                 }}
                             />
                             <MenuLink

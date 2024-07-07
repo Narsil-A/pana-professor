@@ -80,7 +80,7 @@ const UserInfo: React.FC = () => {
     }
 
     return (
-        <div className="flex justify-center items-center min-h-screen">
+        <div className="flex justify-center items-center pt-12">
             <div className="bg-white p-4 rounded-lg shadow-md w-full max-w-lg">
                 <h2 className="text-2xl font-semibold mb-4 text-center">User Information</h2>
                 {errors.length > 0 && (

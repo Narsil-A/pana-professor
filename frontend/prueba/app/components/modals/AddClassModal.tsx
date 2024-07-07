@@ -42,20 +42,20 @@ const AddClassModal: FC = () => {
             const tmpImage = event.target.files[0];
             setDataImage(tmpImage);
         }
-    };
+    }
 
     const setVideoHandler = (setter: React.Dispatch<React.SetStateAction<File | null>>) => (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files.length > 0) {
             const tmpVideo = event.target.files[0];
             setter(tmpVideo);
         }
-    };
+    }
 
     const setSubtitlesHandler = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
             setSubtitles(Array.from(event.target.files));
         }
-    };
+    }
 
     const submitForm = async () => {
         if (
@@ -63,8 +63,8 @@ const AddClassModal: FC = () => {
             dataTitle &&
             dataDescription &&
             dataPrice &&
-            dataDuration &&
-            dataMaxStudents &&
+            //dataDuration &&
+            //dataMaxStudents &&
             dataSubject &&
             dataImage
         ) {
@@ -73,8 +73,10 @@ const AddClassModal: FC = () => {
             formData.append('title', dataTitle);
             formData.append('description', dataDescription);
             formData.append('price_per_session', dataPrice);
-            formData.append('duration_in_minutes', dataDuration);
-            formData.append('max_students', dataMaxStudents);
+            //formData.append('duration_in_minutes', dataDuration);
+            if (dataDuration) formData.append('duration_in_minutes', dataDuration);
+            if (dataMaxStudents) formData.append('max_students', dataMaxStudents);
+            //formData.append('max_students', dataMaxStudents);
             formData.append('subject', dataSubject);
             formData.append('image', dataImage);
 
@@ -108,8 +110,7 @@ const AddClassModal: FC = () => {
         } else {
             setErrors(['All fields are required']);
         }
-    };
-
+    }
     const content = (
         <>
             {currentStep === 1 ? (
@@ -183,6 +184,7 @@ const AddClassModal: FC = () => {
                                 value={dataMaxStudents}
                                 onChange={(e) => setDataMaxStudents(e.target.value)}
                                 className='w-full p-4 border border-gray-600 rounded-xl'
+                                required={false}
                             />
                         </div>
                         <div className='flex flex-col space-y-2'>
@@ -192,6 +194,7 @@ const AddClassModal: FC = () => {
                                 value={dataSubject}
                                 onChange={(e) => setDataSubject(e.target.value)}
                                 className='w-full p-4 border border-gray-600 rounded-xl'
+                                required={false}
                             />
                         </div>
                     </div>
@@ -214,6 +217,7 @@ const AddClassModal: FC = () => {
                                     fill
                                     style={{ objectFit: 'cover' }}
                                     className='rounded-xl'
+                                    
                                 />
                             </div>
                         )}
