@@ -15,19 +15,23 @@ const Quiz: React.FC<QuizProps> = ({ questions, themeColor = '#4A90E2' }) => {
   const router = useRouter();
   const currentQuestion = questions[state.currentQuestionIndex];
 
+  // Handle option selection
   const handleOptionChange = (option: string | boolean) => {
     dispatch({ type: 'SET_SELECTED_OPTION', option });
   };
 
+  // Handle next question action
   const handleNextQuestion = () => {
     const correct = state.selectedOption === currentQuestion.answer;
     dispatch({ type: 'NEXT_QUESTION', correct });
   };
 
+  // Handle quiz finish action
   const handleFinishQuiz = () => {
     router.push('/');
   };
 
+  // Calculate progress percentage
   const progressPercentage = Math.round(((state.currentQuestionIndex + 1) / questions.length) * 100);
 
   return (
@@ -97,7 +101,7 @@ const Quiz: React.FC<QuizProps> = ({ questions, themeColor = '#4A90E2' }) => {
                     onClick={() => handleOptionChange(option === 'True')}
                   >
                     {option}
-                </label>
+                  </label>
                 ))}
               </div>
             )}
@@ -132,6 +136,7 @@ const Quiz: React.FC<QuizProps> = ({ questions, themeColor = '#4A90E2' }) => {
   );
 };
 
+// Utility function to darken a color
 function darken(color: string, percentage: number): string {
   const f = parseInt(color.slice(1), 16),
     t = percentage < 0 ? 0 : 255,
@@ -153,3 +158,4 @@ function darken(color: string, percentage: number): string {
 }
 
 export default Quiz;
+

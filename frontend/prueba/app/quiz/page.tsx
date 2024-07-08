@@ -103,7 +103,7 @@ const questions: QuizQuestion[] = [
     options: ['2', '3', '4', '5'],
     answer: '3',
   }
-];
+]; // here should be the logic to retrieve the quiz from an api. 
 
 
 const QuizPage = () => {

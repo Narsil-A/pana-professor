@@ -4,6 +4,7 @@
 import { getUserId } from "../../lib/actions";
 import ClassList from "../../components/classes/ClassList";
 
+// on progress 
 const MyClassesPage = async () => {
     const userId = await getUserId();
 

@@ -69,19 +69,19 @@ const InteractiveChart: React.FC<ChartProps> = ({ data, options, type, width = '
       <div className="mb-5 flex space-x-2">
         <button 
           onClick={() => setChartType('bar')} 
-          className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-200"
+          className="px-4 py-2 bg-teal-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition-colors duration-200"
         >
           Bar
         </button>
         <button 
           onClick={() => setChartType('line')} 
-          className="px-4 py-2 bg-green-500 text-white rounded-lg shadow-md hover:bg-green-600 transition-colors duration-200"
+          className="px-4 py-2 bg-teal-500 text-white rounded-lg shadow-md hover:bg-green-600 transition-colors duration-200"
         >
           Line
         </button>
         <button 
           onClick={() => setChartType('pie')} 
-          className="px-4 py-2 bg-red-500 text-white rounded-lg shadow-md hover:bg-red-600 transition-colors duration-200"
+          className="px-4 py-2 bg-teal-500 text-white rounded-lg shadow-md hover:bg-red-600 transition-colors duration-200"
         >
           Pie
         </button>

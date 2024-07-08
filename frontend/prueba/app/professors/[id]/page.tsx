@@ -4,6 +4,7 @@ import ClassList from "@/app/components/classes/ClassList";
 import apiService from "@/app/services/apiService";
 import { getUserId } from "@/app/lib/actions";
 
+
 const ProfessorDetailPage = async ({ params }: { params: { id: string } }) => {
     const professor = await apiService.get(`/api/auth/${params.id}`);
     const userId = await getUserId();

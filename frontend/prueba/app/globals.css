@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Video Player Styles */
 .video-player-container {
     @apply mx-auto bg-gray-900 p-3 rounded-lg shadow-lg max-w-4xl;
 }
@@ -30,124 +31,119 @@
     @apply flex items-center;
 }
 
+/* Circular Progress Styles */
 .circular-progress {
     display: block;
     margin: auto;
 }
-  
+
 .circular-progress-trail {
     stroke: #d6d6d6;
 }
-  
+
 .circular-progress-path {
     transition: stroke-dashoffset 0.35s;
     transform: rotate(-90deg);
     transform-origin: 50% 50%;
 }
 
+/* Quiz Component Styles */
 .quiz-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+    @apply flex flex-col items-center justify-center p-5;
 }
 
 .quiz-title {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 20px;
+    @apply text-2xl font-bold mb-5;
 }
 
 .quiz-container {
-    max-width: 600px;
-    width: 100%;
-    margin: auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    @apply max-w-lg w-full mx-auto p-5 bg-white rounded-lg shadow-lg;
 }
 
 .progress-bar {
-    height: 10px;
-    margin-bottom: 20px;
-    transition: width 0.3s ease-in-out;
+    @apply h-2 mb-5 transition-all;
     max-width: 100%;
 }
 
 .question-container {
-    margin-bottom: 20px;
+    @apply mb-5;
 }
 
 .question {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+    @apply text-xl mb-2;
 }
 
 .options {
-    margin-bottom: 20px;
+    @apply mb-5;
 }
 
 .option-bar {
-    display: block;
-    padding: 10px 20px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    background: #f0f0f0;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+    @apply block py-2 px-5 mb-2 rounded bg-gray-200 cursor-pointer transition-all;
 }
 
-.option-bar.hovering {
-    background: #e0e0e0;
+.option-bar:hover {
+    @apply bg-gray-300;
 }
 
 .option-bar.correct {
-    background: #4caf50;
-    color: white;
+    @apply bg-green-500 text-white;
 }
 
 .option-bar.incorrect {
-    background: #f44336;
-    color: white;
+    @apply bg-red-500 text-white;
 }
 
 .next-button {
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+    @apply bg-teal-600 text-white border-none py-2 px-5 rounded cursor-pointer transition-all;
 }
 
 .next-button:disabled {
-    background: #ccc;
+    @apply bg-gray-300;
 }
 
 .feedback {
-    font-size: 1.2em;
-    margin-top: 20px;
+    @apply text-lg mt-5;
 }
 
 .correct {
-    color: green;
+    @apply text-green-500;
 }
 
 .incorrect {
-    color: red;
+    @apply text-red-500;
 }
 
 .score-container {
-    text-align: center;
+    @apply text-center;
 }
 
 .finish-button {
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
+    @apply bg-teal-600 text-white border-none py-2 px-5 rounded cursor-pointer transition-all;
+}
+
+/* Educational Card Styles */
+.cardContainer {
+    @apply p-4 flex flex-col items-center border-2 rounded-lg cursor-pointer transition-all;
+    opacity: 0.6;
+    width: 250px; /* Fixed width for uniform size */
+    height: 270px; /* Fixed height for uniform size */
+    justify-content: space-between;
+}
+
+.cardContainer:hover {
+    @apply border-teal-400 opacity-100;
+}
+
+.cardContainer.active {
+    @apply border-black;
+}
+
+.cardDescription {
+    @apply flex-grow text-center;
+}
+
+.cardButton {
+    @apply mt-auto bg-teal-600 text-white rounded hover:bg-teal-500 transition-all;
+    width: 100%; /* Full width button */
+    text-align: center;
 }

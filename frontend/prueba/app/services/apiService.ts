@@ -53,7 +53,7 @@ const apiService = {
             const token = await getAccessToken();
             const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
                 method: 'POST',
-                body: data,  // This should be form data
+                body: data, 
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -64,28 +64,6 @@ const apiService = {
                 return Promise.reject(errorData);
             }
     
-            return response.json();
-        } catch (error) {
-            return Promise.reject(error);
-        }
-    },
-
-    postWithoutToken: async function (url: string, data: any): Promise<any> {
-        try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
-                method: 'POST',
-                body: JSON.stringify(data),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                return Promise.reject(errorData);
-            }
-
             return response.json();
         } catch (error) {
             return Promise.reject(error);
@@ -120,7 +98,50 @@ const apiService = {
         } catch (error) {
             return Promise.reject(error);
         }
-    }
+    },
+
+    postWithoutToken: async function (url: string, data: any): Promise<any> {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                return Promise.reject(errorData);
+            }
+
+            return response.json();
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    },
+
+    getWithoutToken: async function (url: string): Promise<any> {
+        try {
+          const response = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            }
+          });
+    
+          if (!response.ok) {
+            const errorData = await response.json(); // Parse the error response
+            return Promise.reject(errorData); // Reject the promise with the error data
+          }
+    
+          return response.json(); // Parse and return the response JSON
+        } catch (error) {
+          return Promise.reject(error); // Catch and reject any other errors
+        }
+      },
 };
 
 export default apiService;

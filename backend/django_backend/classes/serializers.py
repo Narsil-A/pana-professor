@@ -1,6 +1,10 @@
 from rest_framework import serializers
+
 from .models import Class
+
 from useraccount.serializers import UserDetailSerializer
+
+
 
 class ClassListSerializer(serializers.ModelSerializer):
     category = serializers.ChoiceField(choices=Class.CATEGORY_CHOICES, read_only=True)
@@ -17,6 +21,8 @@ class ClassListSerializer(serializers.ModelSerializer):
             'professor',
             'duration_in_minutes',
         )
+
+
 class ClassDetailSerializer(serializers.ModelSerializer):
     professor = UserDetailSerializer(read_only=True)
     video_url = serializers.SerializerMethodField()
@@ -46,6 +52,7 @@ class ClassDetailSerializer(serializers.ModelSerializer):
     
     def get_subtitles(self, obj):
         return obj.subtitles if obj.subtitles else []
+        
 
 
 class ClassSerializer(serializers.ModelSerializer):
@@ -63,7 +70,7 @@ class ClassSerializer(serializers.ModelSerializer):
             'max_students', 
             'subject', 
             'professor', 
-            'image',  # Ensure image is included here
-            'video',  # Ensure video is included here
+            'image',  
+            'video',  
             'external_video_url',
         ]

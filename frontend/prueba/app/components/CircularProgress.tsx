@@ -3,13 +3,13 @@
 import React from 'react';
 
 interface CircularProgressProps {
-  percentage: number;
-  text?: string;
-  size?: number;
-  strokeWidth?: number;
-  color?: string;
-  trailColor?: string;
-  gradient?: [string, string];
+  percentage: number; // The progress percentage
+  text?: string; // Optional text to display in the center of the progress circle
+  size?: number; // Optional size of the progress circle in pixels
+  strokeWidth?: number; // Optional stroke width of the progress circle
+  color?: string; // Optional color of the progress circle
+  trailColor?: string; // Optional color of the trail (background) circle
+  gradient?: [string, string]; // Optional gradient colors for the progress circle
 }
 
 const CircularProgress: React.FC<CircularProgressProps> = ({
@@ -21,9 +21,9 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
   trailColor = '#d6d6d6',
   gradient,
 }) => {
-  const radius = (size - strokeWidth) / 2;
-  const circumference = radius * 2 * Math.PI;
-  const strokeDashoffset = circumference - (percentage / 100) * circumference;
+  const radius = (size - strokeWidth) / 2; // Calculate the radius of the circle
+  const circumference = radius * 2 * Math.PI; // Calculate the circumference of the circle
+  const strokeDashoffset = circumference - (percentage / 100) * circumference; // Calculate the stroke offset based on the percentage
 
   return (
     <div className="relative circular-progress-container">
@@ -77,15 +77,15 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
       </svg>
       <style jsx>{`
         .circular-progress-container:hover .circular-progress-path {
-          stroke-dashoffset: ${circumference};
-          animation: refill 1s forwards;
+          stroke-dashoffset: ${circumference}; 
+          animation: refill 1s forwards; 
         }
         @keyframes refill {
           0% {
-            stroke-dashoffset: ${circumference};
+            stroke-dashoffset: ${circumference}; 
           }
           100% {
-            stroke-dashoffset: ${strokeDashoffset};
+            stroke-dashoffset: ${strokeDashoffset}; 
           }
         }
       `}</style>
@@ -94,3 +94,4 @@ const CircularProgress: React.FC<CircularProgressProps> = ({
 };
 
 export default CircularProgress;
+

@@ -37,24 +37,19 @@ const ClassList: React.FC<ClassListProps> = ({
 
     console.log('searchQuery:', searchModal.query);
 
+    // Function to update the favorite status of a class (on progress)
     const markFavorite = (id: string, is_favorite: boolean) => {
         const tmpClasses = classes.map((classItem: ClassType) => {
-            if (classItem.id == id) {
+            if (classItem.id === id) {
                 classItem.is_favorite = is_favorite;
-
-                if (is_favorite) {
-                    console.log('added to list of favorited classes');
-                } else {
-                    console.log('removed from list');
-                }
+                console.log(is_favorite ? 'added to list of favorited classes' : 'removed from list');
             }
-
             return classItem;
         });
-
         setClasses(tmpClasses);
     };
 
+    // Function to fetch classes based on query parameters
     const getClasses = async () => {
         let url = '/api/classes/';
 
@@ -75,9 +70,7 @@ const ClassList: React.FC<ClassListProps> = ({
 
             if (urlQuery.length) {
                 console.log('Query:', urlQuery);
-
                 urlQuery = '?' + urlQuery.substring(1);
-
                 url += urlQuery;
             }
         }
@@ -85,31 +78,25 @@ const ClassList: React.FC<ClassListProps> = ({
         const tmpClasses = await apiService.get(url);
 
         setClasses(tmpClasses.data.map((classItem: ClassType) => {
-            if (tmpClasses.favorites.includes(classItem.id)) {
-                classItem.is_favorite = true;
-            } else {
-                classItem.is_favorite = false;
-            }
-
+            classItem.is_favorite = tmpClasses.favorites.includes(classItem.id);
             return classItem;
         }));
     };
 
+    // Fetch classes whenever the search parameters or query changes
     useEffect(() => {
         getClasses();
     }, [subject, searchModal.query, params]);
 
     return (
         <>
-            {classes.map((classItem) => {
-                return (
-                    <ClassListItem 
-                        key={classItem.id}
-                        classItem={classItem}
-                        markFavorite={(is_favorite: any) => markFavorite(classItem.id, is_favorite)}
-                    />
-                );
-            })}
+            {classes.map((classItem) => (
+                <ClassListItem 
+                    key={classItem.id}
+                    classItem={classItem}
+                    markFavorite={(is_favorite: any) => markFavorite(classItem.id, is_favorite)}
+                />
+            ))}
         </>
     );
 };

@@ -17,7 +17,7 @@ const ClassListItem: React.FC<ClassProps> = ({
     return (
         <div
             className="cursor-pointer"
-            onClick={() => router.push(`/classes/${classItem.id}`)}
+            onClick={() => router.push(`/classes/${classItem.id}`)} // Navigate to class detail page on click
         >
             <div className="relative overflow-hidden aspect-square rounded-xl">
                 <Image
@@ -28,6 +28,7 @@ const ClassListItem: React.FC<ClassProps> = ({
                     alt={classItem.title}
                 />
 
+                {/* Favorite button(on progress), shown only if markFavorite is provided */}
                 {markFavorite && (
                     <FavoriteButton
                         id={classItem.id}
@@ -43,9 +44,7 @@ const ClassListItem: React.FC<ClassProps> = ({
 
             <div className="mt-2">
                 <p className="text-sm text-gray-500">Description <strong>{classItem.description}</strong></p>
-
                 <p className="text-sm text-gray-500">Duration <strong>{classItem.duration_in_minutes} minutes</strong></p>
-
                 <p className="text-sm text-gray-500"><strong>${classItem.price_per_session}</strong> per session</p>
             </div>
         </div>

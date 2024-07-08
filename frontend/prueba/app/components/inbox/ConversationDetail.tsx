@@ -20,21 +20,24 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
     messages,
     conversation
 }) => {
-    const messagesDiv = useRef<HTMLDivElement>(null);
-    const [newMessage, setNewMessage] = useState('');
-    const myUser = conversation.users?.find((user) => user.id == userId);
-    const otherUser = conversation.users?.find((user) => user.id != userId);
-    const [realtimeMessages, setRealtimeMessages] = useState<MessageType[]>([]);
+    const messagesDiv = useRef<HTMLDivElement>(null); // Reference to the messages container div
+    const [newMessage, setNewMessage] = useState(''); // State to store the new message input
+    const myUser = conversation.users?.find((user) => user.id == userId); // Find the current user in the conversation
+    const otherUser = conversation.users?.find((user) => user.id != userId); // Find the other user in the conversation
+    const [realtimeMessages, setRealtimeMessages] = useState<MessageType[]>([]); // State to store real-time messages
 
+    // WebSocket setup
     const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(`ws://127.0.0.1:8000/ws/${conversation.id}/?token=${token}`, {
         share: false,
         shouldReconnect: () => true,
     });
 
+    // Log connection state changes
     useEffect(() => {
         console.log("Connection state changed", readyState);
     }, [readyState]);
 
+    // Handle incoming WebSocket messages
     useEffect(() => {
         if (lastJsonMessage && typeof lastJsonMessage === 'object' && 'name' in lastJsonMessage && 'body' in lastJsonMessage) {
             const message: MessageType = {
@@ -50,6 +53,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         scrollToBottom();
     }, [lastJsonMessage]);
 
+    // Function to send a new message via WebSocket
     const sendMessage = async () => {
         console.log('sendMessage');
         sendJsonMessage({
@@ -67,6 +71,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
         }, 50);
     };
 
+    // Function to scroll to the bottom of the messages container
     const scrollToBottom = () => {
         if (messagesDiv.current) {
             messagesDiv.current.scrollTop = messagesDiv.current.scrollHeight;
@@ -75,10 +80,12 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
 
     return (
         <>
+            {/* Messages container */}
             <div 
                 ref={messagesDiv}
                 className="max-h-[400px] overflow-auto flex flex-col space-y-4"
             >
+                {/* Render initial messages */}
                 {messages.map((message, index) => (
                     <div
                         key={index}
@@ -89,6 +96,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
                     </div>
                 ))}
 
+                {/* Render real-time messages */}
                 {realtimeMessages.map((message, index) => (
                     <div
                         key={index}
@@ -100,6 +108,7 @@ const ConversationDetail: React.FC<ConversationDetailProps> = ({
                 ))}
             </div>
 
+            {/* New message input and send button */}
             <div className="mt-4 py-4 px-6 flex border border-gray-300 space-x-4 rounded-xl">
                 <input
                     type="text"

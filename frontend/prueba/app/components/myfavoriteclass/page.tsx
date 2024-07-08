@@ -1,6 +1,8 @@
 import ClassList from "../../components/classes/ClassList";
 import { getUserId } from "../../lib/actions";
 
+
+// on progress
 const MyFavoritesPage = async () => {
     const userId = await getUserId();
 
