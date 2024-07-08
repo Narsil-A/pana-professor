@@ -98,15 +98,11 @@ This will set up the PostgreSQL database and run the Django application.
 `docker-compose exec web python manage.py makemigrations`
 `docker-compose exec web python manage.py migrate`
 
-7. **Create a Superuser:**
-
-`docker-compose exec web python manage.py createsuperuser`
-
-8. **Run the Development Server**
+7. **Run the Development Server**
 
 `docker-compose up`
 
-9. **Create a superuser:**
+8. **Create a superuser:**
 
 `docker exec -it backend-web-1 python manage.py createsuperuser`
 
