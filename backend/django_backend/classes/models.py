@@ -7,9 +7,9 @@ class Class(models.Model):
     CATEGORY_CHOICES = [
         ('math', 'Math'),
         ('language', 'Language'),
-        ('programming', 'Programming'),
+        ('tecnology', 'Tecnology'),
         ('arts', 'Arts'),
-        ('grammatical', 'Grammatical'),
+        ('science', 'Science'),
     ]
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

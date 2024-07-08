@@ -11,9 +11,9 @@ import { useRouter } from 'next/navigation';
 const categories = [
     { value: 'math', label: 'Math' },
     { value: 'language', label: 'Language' },
-    { value: 'programming', label: 'Programming' },
+    { value: 'tecnology', label: 'Tecnology' },
     { value: 'arts', label: 'Arts' },
-    { value: 'grammatical', label: 'Grammatical' },
+    { value: 'science', label: 'Science' },
 ];
 
 const AddClassModal: FC = () => {
@@ -63,7 +63,7 @@ const AddClassModal: FC = () => {
             dataTitle &&
             dataDescription &&
             dataPrice &&
-            //dataDuration &&
+            //dataDuration && 
             //dataMaxStudents &&
             dataSubject &&
             dataImage
