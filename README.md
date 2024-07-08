@@ -68,6 +68,8 @@ Ensure you have the following installed on your system:
 
 Create a `.env.dev` file in the same level of the django_backend folder directory and add the following variables:
 
+
+```
 DEBUG=1
 SECRET_KEY=your_secret_key
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
@@ -78,6 +80,10 @@ SQL_PASSWORD=postgrespassword
 SQL_HOST=db
 SQL_PORT=5432
 DATABASE=postgres
+
+```
+
+
 
 5. **Set Up Docker:**
 
