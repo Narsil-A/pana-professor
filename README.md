@@ -1,30 +1,28 @@
-Pana Professor App
+# Pana Professor App
 
-This is an application for people that are looking for online classes in diverse topics, like math, tecnology and arts...and also, professor that want shared they knowlage is this topics. 
+This application is designed for people seeking online classes in diverse topics such as math, technology, and arts. It is also aimed at professors who want to share their knowledge in these subjects.
 
-The main funcionality is that a authenticated user can create a class, set a price if they want, and number of students permited in the class room. The user can upload the class videos in different qualities and with their subtitles. 
+The main functionality allows authenticated users to create classes, set a price if desired, and determine the number of students permitted in the classroom. Users can upload class videos in different qualities and with their subtitles.
 
-The authenticated user can contact the professor of the class with a real time chat and asked any question about the topic of the class. 
+Authenticated users can contact the professor of a class via real-time chat to ask any questions about the class topic.
 
-Each class will be show up in the home page for all user to see it, and also, a widget card with each category will filter the classes from their main category. 
+Each class is displayed on the homepage for all users to see, and a widget card for each category filters the classes by their main category.
 
-Also, the app have a section where the user can do quizzes about the topics, and see the results in a score section with visualization charts in differents types of charts. 
+Additionally, the app includes a section where users can take quizzes on various topics and view the results in a score section with visualizations in different chart types.
 
-So navigate in the app:
-   - In the navbar are a  buttion that open a modal to add the classes and the respective files videos and subtitles. 
-   - in the menu navbar authenticated user will see varios sections:
-            - inbox: here the authenticated user can see  the conversation when they have one. To start the conversation they must contact the professor in the detail page of each class. To acces the detail page, must go into the card of each class on the home page. 
-            - In the score section will see the charts with buttons where the user can set the type of charts they want vizualize the data score
-            - Quiz section, the authenticated user can do quizzes of the topics they are studying. 
-            - In the profile section the authenticated user can see their information and edit or delete their user. 
-            - and finally the logout button. 
+## Navigation in the App
 
+- The navbar includes a button that opens a modal to add classes and upload the respective video files and subtitles.
+- In the menu navbar, authenticated users will see various sections:
+  - **Inbox**: Here, authenticated users can see their conversations. To start a conversation, they must contact the professor on the detail page of each class. To access the detail page, they must click on the class card on the homepage.
+  - **Score Section**: Users can view charts with buttons to select the type of chart they want to visualize their score data.
+  - **Quiz Section**: Authenticated users can take quizzes on the topics they are studying.
+  - **Profile Section**: Authenticated users can view, edit, or delete their profile information.
+  - **Logout Button**: Allows users to log out of the application.
 
+# Backend Setup Instructions
 
-
-Django Backend Setup Instructions:
-
-Prerequisites
+## Prerequisites
 
 Ensure you have the following installed on your system:
 
@@ -32,35 +30,43 @@ Ensure you have the following installed on your system:
 2. Docker or OrbStack
 3. PostgreSQL
 
+## Project Structure
 
-Project Structure
+1. `requirements.txt`
+2. `Dockerfile` to containerize the Django application.
+3. `entrypoint.sh`: Script to set up the database and start the application.
+4. `.env`: Environment variables for the application.
 
-1. requirements.txt
-2. Dockerfile to containerize the Django application.
-3. entrypoint.sh Script to set up the database and start the application.
-4. .env Environment variables for the application.
+## Setup Instructions
 
-Setup Instructions
+1. **Clone the repository to your local machine:**
 
-1. Clone the repository to your local machine:
+   Create a project folder, and inside, clone the repository:
 
-1.1 Create project <name> folder, and inside clone the repository. 
+   ```sh
+   git clone https://github.com/Narsil-A/pana-professor.git
+   cd django_backend
 
-git clone <https://github.com/Narsil-A/pana-professor.git>
-cd django_backend
 
-2. Create a Virtual Environment (Optional). 
 
-python -m venv venv
-source venv/bin/activate
 
-3. Install Dependencies
+2. **Create a Virtual Environment (Optional):**
 
-pip install -r requirements.txt 
+   ```sh
+   python -m venv venv
+   source venv/bin/activate
 
-4. Configure Environment Variables
 
-Create a .env.dev file in the root of the django_backend folder directory and add the following variables:
+
+3. **Install Dependencies**
+
+   ```sh
+   pip install -r requirements.txt
+
+
+4. **Configure Environment Variables**
+
+Create a `.env.dev` file in the same level of the django_backend folder directory and add the following variables:
 
 DEBUG=1
 SECRET_KEY=your_secret_key
@@ -73,39 +79,55 @@ SQL_HOST=db
 SQL_PORT=5432
 DATABASE=postgres
 
-5. Set Up Docker
+5. **Set Up Docker:**
 
 Build and run the Docker containers:
 
-docker-compose up --build
+`docker-compose up --build`
 
 This will set up the PostgreSQL database and run the Django application.
 
-6. Run Database Migration and apply the database migrations:
+6. **Run Database Migration and Apply the Database Migrations:**
 
-docker-compose exec web python manage.py makemigrations
-docker-compose exec web python manage.py migrate
+`docker-compose exec web python manage.py makemigrations`
+`docker-compose exec web python manage.py migrate`
 
-7. Create a Superuser 
-docker-compose exec web python manage.py createsuperuser
+7. **Create a Superuser:**
 
-8. Run the Development Server
+`docker-compose exec web python manage.py createsuperuser`
 
-docker-compose up
+8. **Run the Development Server**
 
+`docker-compose up`
 
-9. Create a superuser:
+9. **Create a superuser:**
 
-docker exec -it backend-web-1 python manage.py createsuperuser
+`docker exec -it backend-web-1 python manage.py createsuperuser`
 
 then go to the http://localhost:8000/admin/login/?next=/admin/ 
 
-Frontend Setup Instructions
 
-Prerequisites
 
-Node.js (latest version)
+# Frontend Setup Instructions
 
-npm (Node Package Manager) or yarn
+## Prerequisites
 
-1. Go to the cd frontend/prueba folder and npm install 
+`Node.js (latest version)`
+
+`npm (Node Package Manager) or yarn`
+
+1. **Install Dependencies:**
+
+Navigate to the frontend directory and install dependencies:
+
+`npm install`
+
+2. **Configure Environment Variables:**
+
+Create a `.env.local` file and add the following variable:
+
+NEXT_PUBLIC_API_HOST=http://localhost:8000
+
+3. **Run the Development Server:**
+
+The application should now be running at http://localhost:3000. 
