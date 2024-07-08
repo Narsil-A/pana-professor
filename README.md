@@ -132,4 +132,6 @@ NEXT_PUBLIC_API_HOST=http://localhost:8000
 
 3. **Run the Development Server:**
 
+`npm run dev`
+
 The application should now be running at http://localhost:3000. 
