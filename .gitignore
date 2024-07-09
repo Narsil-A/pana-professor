@@ -5,7 +5,7 @@ yarn-error.log
 
 # Environment files in django_backend
 backend/django_backend/env
-backend/django_backend/.env.dev
+backend/.env.dev
 
 # Python virtual environment
 django_backend/env/
