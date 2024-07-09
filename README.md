@@ -150,10 +150,12 @@ This will set up the PostgreSQL database and run the Django application.
 
 `docker exec -it backend-web-1 python manage.py createsuperuser`
 
+```
 username:
 name:
 email:
 password:
+```
 
 login with username and password
 
@@ -178,6 +180,8 @@ Navigate to the frontend/prueba directory and install dependencies:
 
 Create a `.env.local` file and add the following variable:
 
+directory:
+
 ```
 frontend/prueba
   >app
@@ -186,11 +190,11 @@ frontend/prueba
 
 ```
 
+variable:
 
 `NEXT_PUBLIC_API_HOST=http://localhost:8000`
 
 3. **Run the Development Server:**
-
 
 `npm run dev`
 
