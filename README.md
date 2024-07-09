@@ -76,25 +76,23 @@ Ensure you have the following installed on your system:
 
    Create a project folder, and inside, clone the repository:
 
-   ```sh
-   git clone https://github.com/Narsil-A/pana-professor.git
-   cd backend 
+  
+   `git clone https://github.com/Narsil-A/pana-professor.git`
+   `cd backend`
 
 
 2. **Create a Virtual Environment (Optional):**
 
 Inside the backend/django_backend folder ser the env. 
 
-   ```sh
-   python -m venv env
-   source venv/bin/activate
+`python -m venv env`
+`source venv/bin/activate`
 
 
 
 3. **Install Dependencies**
 
-   ```sh
-   pip install -r requirements.txt
+`pip install -r requirements.txt`
 
 
 4. **Configure Environment Variables**
@@ -107,7 +105,7 @@ backend/
    docker-compose.yml 
 
 
-`
+```
 DEBUG=1
 SECRET_KEY=your_secret_key
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
@@ -118,8 +116,7 @@ SQL_PASSWORD=postgrespassword
 SQL_HOST=db
 SQL_PORT=5432
 DATABASE=postgres
-
-`
+```
 
 
 5. **Set Up Docker:**
