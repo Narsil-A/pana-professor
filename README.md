@@ -6,47 +6,47 @@ The Pana Professor App is designed for individuals seeking online classes in a v
 
 Class Creation and Management
 
-	•	Create Classes: Authenticated users can create classes, set a price, and determine the maximum number of students allowed.
-	•	Upload Videos: Users can upload class videos in different qualities (480p, 720p, and 1080p) along with subtitles in VTT format (e.g., name_class_english.vtt).
-	•	Update Classes: Users can update class details and track the completeness of their class information through a circular progress widget.
+- Create Classes: Authenticated users can create classes, set a price, and determine the maximum number of students allowed.
+- Upload Videos: Users can upload class videos in different qualities (480p, 720p, and 1080p) along with subtitles in VTT format (e.g., name_class_english.vtt)
+- Update Classes: Users can update class details and track the completeness of their class information through a circular progress widget.
    
 Video Player
 
-	•	Integrated Video Player: The app features a custom video player that supports multiple video qualities (480p, 720p, 1080p) and subtitles in VTT format. Users can:
-	•	Play/Pause: Toggle play and pause states.
-	•	Volume Control: Adjust the volume of the video.
-	•	Seek: Seek to different parts of the video.
-	•	Quality Selection: Select different video qualities.
-	•	Subtitle Selection: Choose from available subtitles.
-	•	Skip Forward/Backward: Skip 10 seconds forward or backward in the video.
-	•	Progress Tracking: View the current time and duration of the video.
+- Integrated Video Player: The app features a custom video player that supports multiple video qualities (480p, 720p, 1080p) and subtitles in VTT format. Users can:
+- Play/Pause: Toggle play and pause states.
+- Volume Control: Adjust the volume of the video.
+- Seek: Seek to different parts of the video.
+- Quality Selection: Select different video qualities.
+- Subtitle Selection: Choose from available subtitles.
+- Skip Forward/Backward: Skip 10 seconds forward or backward in the video.
+- Progress Tracking: View the current time and duration of the video.
 
 Real-time Chat
 
-	•	Contact Professors: Authenticated users can contact the professor of a class via real-time chat for any questions about the class topic. Users navigate to the class detail page, select the professor, and access a contact form widget.
+- Contact Professors: Authenticated users can contact the professor of a class via real-time chat for any questions about the class topic. Users navigate to the class detail page, select the professor, and access a contact form widget.
 
 
 Class Display and Filtering
 
-	•	Homepage Display: All classes are displayed on the homepage, accessible to all users.
-	•	Category Filtering: A widget card for each category (e.g., math, language) allows users to filter classes by their main category.
+- Homepage Display: All classes are displayed on the homepage, accessible to all users.
+- Category Filtering: A widget card for each category (e.g., math, language) allows users to filter classes by their main category.
 
 
 Quizzes and Score Visualization (backend on progress)
 
-	•	Take Quizzes: Authenticated users can take quizzes on various topics they are studying.
-	•	View Scores: Users can view their quiz results in a score section with visualizations in different chart types.
+- Take Quizzes: Authenticated users can take quizzes on various topics they are studying.
+- View Scores: Users can view their quiz results in a score section with visualizations in different chart types.
 
 
 Navigation in the App
 
-	•	Navbar: Includes a button to open a modal for adding classes and uploading the respective video files and subtitles.
-	•	Menu Navbar: Authenticated users have access to various sections:
-	•	Inbox: View conversations and start new ones by contacting professors on the class detail page. Access the detail page by clicking on a class card on the homepage.
-	•	Score Section: View score data with options to select different chart types for visualization.
-	•	Quiz Section: Take quizzes on studied topics.
-	•	Profile Section: View, edit, or delete profile information.
-	•	Logout Button: Log out of the application.
+- Navbar: Includes a button to open a modal for adding classes and uploading the respective video files and subtitles.
+- Menu Navbar: Authenticated users have access to various sections:
+- Inbox: View conversations and start new ones by contacting professors on the class detail page. Access the detail page by clicking on a class card on the homepage.
+- Score Section: View score data with options to select different chart types for visualization.
+- Quiz Section: Take quizzes on studied topics.
+- Profile Section: View, edit, or delete profile information.
+- Logout Button: Log out of the application.
 
 
 ## Summary
@@ -107,7 +107,7 @@ backend/
    docker-compose.yml 
 
 
-```
+`
 DEBUG=1
 SECRET_KEY=your_secret_key
 DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
@@ -119,7 +119,7 @@ SQL_HOST=db
 SQL_PORT=5432
 DATABASE=postgres
 
-```
+`
 
 
 5. **Set Up Docker:**
