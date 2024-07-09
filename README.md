@@ -123,10 +123,12 @@ DATABASE=postgres
 
 Build and run the Docker containers:
 
+```
 backend/
    >django_backend
    $ .env.dev
    docker-compose.yml 
+```
 
 `docker-compose up --build`
 
@@ -176,10 +178,13 @@ Navigate to the frontend/prueba directory and install dependencies:
 
 Create a `.env.local` file and add the following variable:
 
+```
 frontend/prueba
   >app
   >public
   $ .env.local
+
+```
 
 
 `NEXT_PUBLIC_API_HOST=http://localhost:8000`
