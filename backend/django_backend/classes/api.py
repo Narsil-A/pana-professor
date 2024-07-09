@@ -100,28 +100,39 @@ def create_class(request):
         class_instance = form.save(commit=False)
         class_instance.professor = request.user
         class_instance.save()
-        
+
         # Handle subtitle files
         subtitle_files = request.FILES.getlist('subtitles')
         subtitles = []
+        subtitle_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', 'classes', 'subtitles')
+        os.makedirs(subtitle_dir, exist_ok=True)
+        
+        lang_map = {
+            'english': 'en',
+            'spanish': 'es',
+        }
+
         for index, subtitle_file in enumerate(subtitle_files):
-            subtitle_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', 'classes', 'subtitles')
-            os.makedirs(subtitle_dir, exist_ok=True)
             subtitle_path = os.path.join(subtitle_dir, f'{uuid.uuid4()}_{subtitle_file.name}')
             with open(subtitle_path, 'wb+') as destination:
                 for chunk in subtitle_file.chunks():
                     destination.write(chunk)
+            file_name = subtitle_file.name.split('.')[0]
+            label, lang = file_name.rsplit('_', 1)  # Split by the last underscore
+            
+            # Map the lang to language code
+            lang_code = lang_map.get(lang.lower(), lang.lower())
+
             subtitles.append({
                 'src': f'{settings.WEBSITE_URL}/media/uploads/classes/subtitles/{os.path.basename(subtitle_path)}',
-                'lang': subtitle_file.name.split('.')[0],
-                'label': subtitle_file.name.split('.')[0],
-                'default': index == 0  
+                'lang': lang_code,  # Use the mapped language code
+                'label': lang.capitalize(),  # Capitalize the label (e.g., 'English', 'Spanish')
             })
+        
         class_instance.subtitles = subtitles
         class_instance.save()
         return JsonResponse({'success': True, 'data': ClassDetailSerializer(class_instance, context={'request': request}).data})
     return JsonResponse({'success': False, 'errors': form.errors})
-
 
 
 # Update an existing class
@@ -139,27 +150,40 @@ def update_class(request, pk):
         class_instance = form.save(commit=False)
         class_instance.professor = request.user
         class_instance.save()
-        
+
         # Handle subtitle files
         subtitle_files = request.FILES.getlist('subtitles')
         subtitles = []
+        subtitle_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', 'classes', 'subtitles')
+        os.makedirs(subtitle_dir, exist_ok=True)
+        
+        lang_map = {
+            'english': 'en',
+            'spanish': 'es',
+        }
+
         for index, subtitle_file in enumerate(subtitle_files):
-            subtitle_dir = os.path.join(settings.MEDIA_ROOT, 'uploads', 'classes', 'subtitles')
-            os.makedirs(subtitle_dir, exist_ok=True)
             subtitle_path = os.path.join(subtitle_dir, f'{uuid.uuid4()}_{subtitle_file.name}')
             with open(subtitle_path, 'wb+') as destination:
                 for chunk in subtitle_file.chunks():
                     destination.write(chunk)
+            file_name = subtitle_file.name.split('.')[0]
+            label, lang = file_name.rsplit('_', 1)  # Split by the last underscore
+            
+            # Map the lang to language code
+            lang_code = lang_map.get(lang.lower(), lang.lower())
+
             subtitles.append({
                 'src': f'{settings.WEBSITE_URL}/media/uploads/classes/subtitles/{os.path.basename(subtitle_path)}',
-                'lang': subtitle_file.name.split('.')[0],
-                'label': subtitle_file.name.split('.')[0],
-                'default': index == 0  
+                'lang': lang_code,  # Use the mapped language code
+                'label': lang.capitalize(),  # Capitalize the label (e.g., 'English', 'Spanish')
             })
+        
         class_instance.subtitles = subtitles
         class_instance.save()
         return JsonResponse({'success': True, 'data': ClassDetailSerializer(class_instance, context={'request': request}).data})
     return JsonResponse({'success': False, 'errors': form.errors})
+
 
 
 # Retrieve class video details
@@ -171,30 +195,28 @@ def class_video(request, pk):
         class_instance = Class.objects.get(pk=pk)
     except Class.DoesNotExist:
         return JsonResponse({'error': 'Class not found'}, status=404)
-    
+
     video_qualities = [
-        {"label": "360p", "src": class_instance.get_video_url('360p')},
         {"label": "480p", "src": class_instance.get_video_url('480p')},
         {"label": "720p", "src": class_instance.get_video_url('720p')},
         {"label": "1080p", "src": class_instance.get_video_url('1080p')}
     ]
-    
+
     subtitles = [{
         "kind": "subtitles",
         "src": subtitle["src"],
         "srcLang": subtitle["lang"],
-        "label": subtitle["label"].split('-')[1].strip()
+        "label": subtitle["label"]
     } for subtitle in (class_instance.subtitles if class_instance.subtitles else [])]
-    
+
     data = {
         'id': class_instance.id,
         'title': class_instance.title,
-        'video_url': class_instance.get_video_url('360p'),
+        'video_url': class_instance.get_video_url('480p'),
         'video_qualities': video_qualities,
         'subtitles': subtitles,
     }
     return JsonResponse(data)
-
 
 
 # Toggle favorite status for a class

@@ -47,7 +47,7 @@ class ClassDetailSerializer(serializers.ModelSerializer):
 
     def get_video_url(self, obj):
         request = self.context.get('request', None)
-        quality = request.query_params.get('quality', '360p') if request else '360p'
+        quality = request.query_params.get('quality', '480p') if request else '480p'
         return obj.get_video_url(quality)
     
     def get_subtitles(self, obj):

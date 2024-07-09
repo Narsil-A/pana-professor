@@ -74,6 +74,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         ConversationMessage.objects.create(
             conversation_id=conversation_id,
             body=body,
-            sent_to_id=sent_to_id,
+            sent_to_id=sent_to_id, 
             created_by=user
         )

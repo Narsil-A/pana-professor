@@ -24,4 +24,3 @@ Thumbs.db
 
 .env*.local
 
-backend/django_backend/media

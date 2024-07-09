@@ -34,7 +34,6 @@ const EditClassModal: FC<EditClassModalProps> = ({ params, isOpen, onClose }) =>
   const [dataMaxStudents, setDataMaxStudents] = useState('');
   const [dataSubject, setDataSubject] = useState('');
   const [dataImage, setDataImage] = useState<File | null>(null);
-  const [video360p, setVideo360p] = useState<File | null>(null);
   const [video480p, setVideo480p] = useState<File | null>(null);
   const [video720p, setVideo720p] = useState<File | null>(null);
   const [video1080p, setVideo1080p] = useState<File | null>(null);
@@ -97,7 +96,6 @@ const EditClassModal: FC<EditClassModalProps> = ({ params, isOpen, onClose }) =>
     if (dataSubject) formData.append('subject', dataSubject);
     if (dataImage) formData.append('image', dataImage);
 
-    if (video360p) formData.append('video_360p', video360p);
     if (video480p) formData.append('video_480p', video480p);
     if (video720p) formData.append('video_720p', video720p);
     if (video1080p) formData.append('video_1080p', video1080p);
@@ -238,10 +236,6 @@ const EditClassModal: FC<EditClassModalProps> = ({ params, isOpen, onClose }) =>
               </div>
             )}
             <div className='py-2 px-6 bg-gray-600 text-white rounded-xl'>
-              <label htmlFor="video360pUpload">Upload Video 360p</label>
-              <input id="video360pUpload" type="file" accept='video/*' onChange={setVideoHandler(setVideo360p)} />
-            </div>
-            <div className='py-2 px-6 bg-gray-600 text-white rounded-xl'>
               <label htmlFor="video480pUpload">Upload Video 480p</label>
               <input id="video480pUpload" type="file" accept='video/*' onChange={setVideoHandler(setVideo480p)} />
             </div>
@@ -287,6 +281,7 @@ const EditClassModal: FC<EditClassModalProps> = ({ params, isOpen, onClose }) =>
 };
 
 export default EditClassModal;
+
 
 
 

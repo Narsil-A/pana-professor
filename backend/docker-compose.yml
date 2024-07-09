@@ -3,7 +3,8 @@ version: '3.8'
 services:
   web:
     build: ./django_backend
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./django_backend/:/usr/src/django_backend/
     ports:

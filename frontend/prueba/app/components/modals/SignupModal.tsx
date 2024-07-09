@@ -10,7 +10,6 @@ import apiService from "@/app/services/apiService";
 import { handleLogin } from "@/app/lib/actions";
 
 const SignupModal = () => {
-    //
     // Variables
 
     const router = useRouter();
@@ -21,7 +20,6 @@ const SignupModal = () => {
     const [password2, setPassword2] = useState('');
     const [errors, setErrors] = useState<string[]>([]);
 
-    //
     // Submit functionality
 
     const submitSignup = async () => {

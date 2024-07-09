@@ -6,8 +6,8 @@ from useraccount.models import User
 class Class(models.Model):
     CATEGORY_CHOICES = [
         ('math', 'Math'),
-        ('language', 'Language'),
-        ('tecnology', 'Tecnology'),
+        ('languages', 'Languages'),
+        ('technology', 'Technology'),
         ('arts', 'Arts'),
         ('science', 'Science'),
     ]
@@ -22,7 +22,6 @@ class Class(models.Model):
     subject = models.CharField(max_length=255)
     favorited = models.ManyToManyField(User, related_name='favorite_classes', blank=True)
     image = models.ImageField(upload_to='uploads/classes', null=True, blank=True)
-    video_360p = models.FileField(upload_to='uploads/classes', null=True, blank=True)
     video_480p = models.FileField(upload_to='uploads/classes', null=True, blank=True)
     video_720p = models.FileField(upload_to='uploads/classes', null=True, blank=True)
     video_1080p = models.FileField(upload_to='uploads/classes', null=True, blank=True)
@@ -37,9 +36,7 @@ class Class(models.Model):
         return None
 
     def get_video_url(self, quality):
-        if quality == '360p' and self.video_360p:
-            return f'{settings.WEBSITE_URL}{self.video_360p.url}'
-        elif quality == '480p' and self.video_480p:
+        if quality == '480p' and self.video_480p:
             return f'{settings.WEBSITE_URL}{self.video_480p.url}'
         elif quality == '720p' and self.video_720p:
             return f'{settings.WEBSITE_URL}{self.video_720p.url}'

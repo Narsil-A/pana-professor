@@ -4,6 +4,7 @@ import apiService from "@/app/services/apiService";
 import CircularProgress from "@/app/components/CircularProgress";
 import EditClassButton from "@/app/components/EditClassButton";
 import { ClassItem } from "@/app/types/ClassItem";
+import { getUserId } from "@/app/lib/actions"; // Import the getUserId function
 
 const calculateProgress = (classItem: ClassItem): number => {
     const fields = [
@@ -22,6 +23,7 @@ const calculateProgress = (classItem: ClassItem): number => {
 };
 
 const ClassDetailPage = async ({ params }: { params: { id: string } }) => {
+    const userId = await getUserId(); 
     const classItem: ClassItem = await apiService.get(`/api/classes/${params.id}`);
     const progress = calculateProgress(classItem);
 
@@ -34,11 +36,11 @@ const ClassDetailPage = async ({ params }: { params: { id: string } }) => {
                     width={300}
                     height={300}
                     objectFit="contain"
-                    className="flex rounded-xl border border-red-500"
+                    className="flex rounded-xl"
                 />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 border border-red-500 ml-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 ml-4">
                 <div className="md:col-span-2 py-6 pr-6">
                     <h1 className="mb-4 text-4xl">{classItem.title}</h1>
                     <span className="mb-6 block text-lg text-gray-600">
@@ -63,16 +65,18 @@ const ClassDetailPage = async ({ params }: { params: { id: string } }) => {
                     <p className="mt-6 text-lg">{classItem.description}</p>
                     {classItem.video_url && (
                         <Link href={`/videoclass/${classItem.id}`}>
-                            <span className="mt-6 inline-block px-6 py-2 bg-blue-600 text-white rounded-lg">
+                            <span className="mt-6 inline-block px-6 py-2 bg-teal-600 text-white rounded-lg">
                                 Watch Video
                             </span>
                         </Link>
                     )}
-                    <div className="py-3 pr-6 pl-6">
-                        <EditClassButton classId={params.id} />
-                    </div>
+                    {userId === classItem.professor.id && (
+                        <div className="py-3 pr-6 pl-6">
+                            <EditClassButton classId={params.id} />
+                        </div>
+                    )}
                 </div>
-                <div className="md:col-span-1 flex justify-center items-center border border-red-500">
+                <div className="md:col-span-1 flex justify-center items-center">
                     <div className="py-6 pr-6 pl-6">
                         <h2 className="mb-4 text-2xl text-center">Class Data Progress</h2>
                         <CircularProgress
@@ -92,8 +96,4 @@ const ClassDetailPage = async ({ params }: { params: { id: string } }) => {
 };
 
 export default ClassDetailPage;
-
-
-
-
 

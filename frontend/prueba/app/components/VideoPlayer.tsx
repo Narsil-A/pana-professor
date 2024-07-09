@@ -111,17 +111,16 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ initialUrl, videoQualities, s
         const secs = Math.floor(seconds % 60);
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
-
-    // Map the current subtitle to the expected format for the player
+        // Map the current subtitle to the expected format for the player
     const mappedSubtitles = currentSubtitle ? [{
-        kind: 'subtitles',
-        src: currentSubtitle.src,
-        srcLang: currentSubtitle.srcLang,
-        label: currentSubtitle.label,
-        default: true,
-    }] : [];
-
-    console.log('Configured subtitles:', mappedSubtitles);
+            kind: 'subtitles',
+            src: currentSubtitle.src,
+            srcLang: currentSubtitle.srcLang || 'en', // Default to 'en' if srcLang is missing
+            label: currentSubtitle.label || 'English', // Default to 'English' if label is missing
+            default: true,
+        }] : [];
+    
+        console.log('Configured subtitles:', mappedSubtitles);
 
     return (
         <div className="video-player-container mx-auto bg-gray-900 p-6 rounded-lg shadow-lg max-w-4xl">

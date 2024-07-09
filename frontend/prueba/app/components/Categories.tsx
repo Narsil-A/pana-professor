@@ -76,7 +76,7 @@ const Categories = () => {
 
     searchModal.setQuery(query);
   };
-  // funcionalitie not complete yet. 
+
   const markFavorite = (id: string, is_favorite: boolean) => {
     const tmpClasses = classes.map((classItem: ClassType) => {
       if (classItem.id === id) {
